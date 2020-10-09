@@ -1,3 +1,4 @@
+{% load socialaccount %}
 <!doctype html>
 <html lang="en">
 
@@ -104,6 +105,12 @@
                             {% endfor %}
                             <h4 class="text-center">SIGN UP </h4>
                             <div class="card-body">
+                            {% if user.is_authenticated %}
+                            <p>Welcome, {{ user.username }} !</p>
+                            {% else %}
+                            <a  class="btn btn-sm btn-block btn-light mt-0"  href="{% provider_login_url 'google' %}">Login With <img src="https://img.icons8.com/color/30/000000/google-logo.png"/></a>
+
+                             {% endif %}
                   
                           <p class="text-center mt-1">OR</p>
 
