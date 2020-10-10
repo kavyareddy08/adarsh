@@ -27,7 +27,7 @@ def services(request):
 
     
 def contact(request):
-    if request.method=="POST":
+    if request.method=='POST':
         fullname=request.POST.get('fullname')
         email=request.POST.get('email')
         phone=request.POST.get('num')
@@ -36,15 +36,18 @@ def contact(request):
         contact_query.save()
         from_email=settings.EMAIL_HOST_USER
         # email starts here
-        # your mail starts here
         connection=mail.get_connection()
         connection.open()
-        email_mesge=mail.EmailMessage(f'Website Email from {fullname}',f'Email from : {email}\nUser Query :{description}\nPhone No : {phone}',from_email,['kavyareddysr07@gmail.com','snsathya7411@gmail.com'],cc=[],connection=connection)
-        email_user=mail.EmailMessage('KAVYA',f'Hello {fullname}\nThanks fo Contacting Us Will Resolve Your Query Asap\nThank You',from_email,[email],connection=connection)
+        email_mesge=mail.EmailMessage(f'Website Email from : {fullname}',f'Email from: {email}\nPhone Number : {phone}\nUser Query : {description}',from_email,['snsathhya7411@gmail.com'],connection=connection)
+        email_user=mail.EmailMessage('kavya website',f'Hello {fullname}\nThanks for Contacting Us! We will resolve your query ASAP!\nThank You.',from_email,[email],connection=connection)
         connection.send_messages([email_mesge,email_user])
         connection.close()
-        messages.info(request,"Thanks for Contacting Us ")
+        messages.info(request,"Thanks for Contacting Us")
         return redirect('/contact')
+        
+
+
+    
 
     return render(request,'contact.html')
     
