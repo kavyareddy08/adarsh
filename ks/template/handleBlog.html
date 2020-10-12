@@ -3,5 +3,50 @@
 Blog
 {% endblock title %}
 {% block body %}
-<h1>This is my Blog pAGE</h1>
+
+<div class="container mt-3 ">
+  <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page"> Welcome {{request.user}} &nbsp; &nbsp; </li>
+
+    <div class="btn-groupIml-3">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria_haspopup="true" aria-expanded="true"> Add Post </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/">Home</a>
+      <a class="dropdown-item" href="/addpost">Add Posts</a>
+
+    </div>
+
+
+
+
+
+    </div>
+    
+  </ol>
+</nav>
+</div>
+
+
+{% for post in posts reversed %}
+{% load static %}
+
+<div class="container mt-3">
+  <div class="card" style="width: 25rem;">
+    <img src="{{post.img.url}}" class="card-img-top" alt="1">
+    <div class="card-title">
+      <h6 class="text-center">Title : {{post.title}}</h6>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{post.content}}</p>
+      <hr>
+      <p>
+      <b>Posted by : </b>{{post.author}} at {{post.timeStamp}}</p>
+    </div>
+  </div>
+
+
+</div>
+{% endfor %}
+
 {% endblock body %}

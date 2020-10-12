@@ -11,5 +11,22 @@ class Contact(models.Model):
 
     def __str__(self):
          return self.email +" "+"by"+" "+ self.name
+
+         
+class BlogPosts(models.Model):
+    sno=models.AutoField(primary_key=True)
+    title=models.CharField(max_length=100)
+    content=models.TextField()
+    author=models.CharField(max_length=100)
+    img=models.ImageField(upload_to='blog',blank=True,null=True)
+    timeStamp=models.DateTimeField(auto_now_add=True,blank=True)
+
+
+
+    def __str(self):
+      
+       return self.author
+
+
     
     

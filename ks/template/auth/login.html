@@ -14,9 +14,10 @@
     <a href="https://icons8.com/icon/17949/google"></a>
 
     <style>
-        body {
-            background-color: lightgray;         
-            background-repeat:no-repeat;
+        
+            body {
+            background-color: #ffcfdf;
+            background-image: linear-gradient(315deg, #ffcfdf 0%, #b0f3f1 74%);
         }
         p{
             color:white;
@@ -30,17 +31,17 @@
             animation-iteration-count: infinite;
         }
         
-        @keyframes login {
+        @keyframes sign {
             0% {
-                background-color: #7ee8fa;
-                background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
+                background-color: #fba8a4;
+background-image: linear-gradient(315deg, #fba8a4 0%, #dad2f3 74%);
                 border-radius: 15px;
                 top: 0px;
                 color: white;
             }
             50% {
-                background-color: #00b712;
-                background-image: linear-gradient(315deg, #00b712 0%, #5aff15 74%);
+                background-color: #f9c5d1;
+background-image: linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%);
                 top: 10px;
                 color: white;
             }
@@ -60,12 +61,13 @@
         }
         
         .card-body {
-            background-color: black;
+            background-color: #537895;
+background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
         }
         
         .form-group input:hover {
-            background-color: #00b712;
-            background-image: linear-gradient(315deg, #00b712 0%, #5aff15 74%);
+            background-color: #f3e6e8;
+background-image: linear-gradient(315deg, #f3e6e8 0%, #d5d0e5 74%);
             color: black;
         }
         
@@ -73,6 +75,8 @@
             color: white
         }
     </style>
+
+    
 
     <title>Login</title>
 </head>
@@ -120,7 +124,7 @@
                                         <input type="password" class="form-control" name="pass1" id="pass1" required>
                                     </div>
 
-                                    <button type="submit" class="btn btn-success btn-sm btn-block">LogIn</button>
+                                    <button type="submit" class="btn btn-outline-info btn-sm btn-block">LogIn</button>
 
                                 </form>
                                 <br>

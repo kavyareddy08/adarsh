@@ -1,0 +1,35 @@
+{% extends 'basic.html' %}
+{% block title %}
+ addpost
+{% endblock title %}
+{% block body %}
+<div class="container">
+    <h3>ADD YOUR POST</h3>
+    
+        <form action="/addpost" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Give a valid title name" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="desc">Content</label>
+                <textarea type="text" class="form-control" id="desc" name="desc" placeholder="Add content" required></textarea>
+            </div>
+    
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+    
+            <div class="form-group"><br>
+                <label for="file">Select a Post Image</label>
+                <br>
+                <input type="file" class="form-group-input" name="file" id="file" required>
+            </div>
+    
+            <button type="submit" class="btn btn-success mt-3">Save</button>
+        
+    </form>
+</div>
+{% endblock body%}

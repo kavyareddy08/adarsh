@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.conf import settings
 from django.contrib import messages
-from .models import Contact
+from .models import Contact,BlogPosts
 from django.core import mail
 from django.core.mail.message import EmailMessage
 
@@ -20,7 +20,10 @@ def about(request):
 def handleBlog(request):
     if not request.user.is_authenticated:
         return redirect('/login')
-    return render(request,'handleBlog.html')
+        
+    posts=BlogPosts.objects.all()
+    context= {'posts':posts}
+    return render(request,'handleBlog.html',context)
 
 def services(request):
     return render(request,'services.html')
@@ -63,12 +66,12 @@ def signup(request):
             pass2=request.POST['pass2']
             if pass1!=pass2:
 
-                return HttpResponse("Password not match")
+                messages.info("Password not match")
 
 
             try:
                  if User.objects.get(username=username):
-                     return HttpResponse("username is taken")
+                     messages.info("username is taken")
 
             except Exception as identifier:
                  pass
@@ -77,7 +80,7 @@ def signup(request):
             myuser.first_name=firstname
             myuser.last_name=lastname
             myuser.save()
-            return HttpResponse("signup successful")  
+            messages.info(request,"signup successful")  
 
     return render(request,'auth/signup.html')
 
@@ -101,3 +104,32 @@ def handlelogout(request):
     logout(request)
     messages.success(request,"logout succesfull")
     return redirect('/login')
+
+def addpost(request):
+    if request.method == 'POST':
+
+        title=request.POST.get('title')
+        content=request.POST.get('desc')
+        name=request.POST.get('name')
+        file=request.FILES['file']
+        query=BlogPosts(title=title,content=content, author=name,img=file)
+        query.save()
+        messages.info(request,'Your Post Has Been Saved')
+        return redirect('/handleBlog')
+
+
+    return render(request,'addpost.html')
+
+def search(request):
+    query=request.GET['search']
+    if len(query)>80:
+        allPosts = BlogPost.objects.none()
+    else:
+        allPostsTitle=BlogPost.objects.filter(title__icontains=query)
+        allPostsContent=BlogPost.objects.filter(content__icontains=query)
+        allPosts=allPostsTitle.union(allPostsContent)
+    if allPosts.count() == 0:
+        messages.warning(request,"No Search Results")
+    params={'allPosts':allPosts,'query':query}        
+
+    return render(request,'search.html',params)    
